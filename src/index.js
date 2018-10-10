@@ -77,6 +77,7 @@ export default class ImageViewer extends Component {
 
   static propTypes = {
     shown: PropTypes.bool.isRequired,
+    onBeforeClose: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired,
     imageUrls: PropTypes.array.isRequired,
     index: PropTypes.number.isRequired,
@@ -364,6 +365,8 @@ export default class ImageViewer extends Component {
   handleLayout() {}
 
   close() {
+    this.props.onBeforeClose();
+
     Animated.parallel([
       Animated.timing(this.state.fadeAnim, {
         toValue: 0,
